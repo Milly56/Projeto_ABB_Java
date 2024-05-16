@@ -43,12 +43,16 @@ public class Noarvore {
             }
         }
     }
-    public static void esvaziar(Noarvore n) {
-    	if (n == null) {
+  public static void esvaziar(Noarvore raiz) {
+    	if (raiz == null) {
     		return;
     	}
-    	esvaziar(n.esquerda);
-    	esvaziar(n.direita);
-    	n = null;
+    	esvaziar(raiz.esquerda);
+    	esvaziar(raiz.direita);
+    	
+    	raiz.esquerda = null;
+    	raiz.direita = null;
+    	
+    	raiz = null;
     }
 }
