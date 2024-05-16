@@ -52,7 +52,5 @@ public class Noarvore {
     	
     	raiz.esquerda = null;
     	raiz.direita = null;
-    	
-    	raiz = null;
     }
 }
