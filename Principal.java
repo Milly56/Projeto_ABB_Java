@@ -59,7 +59,19 @@ public class Principal {
                     break;
                 }
                 case 3: {
-                    // Implement search logic
+
+                      System.out.println("\nDigite qual o RGM deseja buscar: ");
+                     String buscaRgm = leitorNumero.next();
+                     Noarvore alunoBuscado = raiz.buscar(buscaRgm);
+
+                  //verifica se o aluno existe
+                     if (alunoBuscado == null) {
+                         System.out.println("\nAluno não encontrado");
+                     } else {
+                     	System.out.println("\nAluno encontrado");
+                         System.out.println(alunoBuscado);
+                     }
+                 
                     break;
                 }
                 case 4: {
