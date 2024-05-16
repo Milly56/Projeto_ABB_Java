@@ -43,6 +43,29 @@ public class Noarvore {
             }
         }
     }
+
+ //metodo que recebe qual aluno deseja buscar pelo rgm
+    public Noarvore buscar(String rgm) {
+        return buscar(this, rgm);
+    }
+
+    private Noarvore buscar(Noarvore noarvore, String rgm) {
+    	//se for vazio ou nao for encontrado
+        if (noarvore == null) {
+            return null;
+        }
+        //se o rgm digitado for igual ao rgm buscado retorna o conteudo
+        if (rgm.equals(noarvore.aluno.getRgm())) {
+            return noarvore;
+        }
+        //se o rgm digitado e menor que o rgm que ta sendo buscado ou o contrario
+        if (rgm.compareTo(noarvore.aluno.getRgm()) < 0) {
+            return buscar(noarvore.esquerda, rgm);
+        } else {
+            return buscar(noarvore.direita, rgm);
+        }
+    }
+    
   public static void esvaziar(Noarvore raiz) {
     	if (raiz == null) {
     		return;
@@ -53,4 +76,9 @@ public class Noarvore {
     	raiz.esquerda = null;
     	raiz.direita = null;
     }
+
+    @Override
+    	    public String toString() {
+    	        return aluno.toString();
+    	    }
 }
