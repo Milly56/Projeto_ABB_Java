@@ -2,12 +2,12 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
- 
-public class Principal {
- 
-    public static void main(String[] args) {
 
-String fileName = "dado.txt";
+public class Principal {
+    public static void main(String[] args) {
+        
+    	
+    	 String fileName = "dado.txt";
          
          try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
              String line;
@@ -17,12 +17,11 @@ String fileName = "dado.txt";
          } catch (IOException e) {
              System.err.println("Erro ao ler o arquivo: " + e.getMessage());
          }
-     
-        Scanner leitorNumero = new Scanner(System.in);
- 
-        Noarvore raiz = new Noarvore(new Aluno("João-RAIZ","123456"));
-        raiz.inserirAluno("Maria","654321");
-        raiz.inserirAluno("Carlos", "987654");
+  
+    	Scanner leitorNumero = new Scanner(System.in);
+        Noarvore raiz = new Noarvore(new Aluno("João da Costa -RAIZ","96853402"));
+        raiz.inserirAluno("Maria da Penha","65432123");
+        raiz.inserirAluno("Carlos Luiz do Nascimento ", "98765445");
  
         System.out.println("\n");
  
@@ -71,33 +70,45 @@ String fileName = "dado.txt";
                     break;
                 }
                 case 2: {
-                    // Implement removal logic
+                 
+                	System.out.print("Digite o RG do aluno que deseja remover: ");
+                    String rgm = leitorNumero.next(); 
+                    raiz.remover(rgm);
+                    System.out.println("Aluno removido com sucesso!");
+            
+                	
+                	
                     break;
                 }
                 case 3: {
-
-                      System.out.println("\nDigite qual o RGM deseja buscar: ");
+                  
+                	 System.out.println("\nDigite qual o RGM deseja buscar: ");
                      String buscaRgm = leitorNumero.next();
                      Noarvore alunoBuscado = raiz.buscar(buscaRgm);
-
-                  //verifica se o aluno existe
+                     
+                     //verifica se o aluno existe
+                     
                      if (alunoBuscado == null) {
                          System.out.println("\nAluno não encontrado");
                      } else {
                      	System.out.println("\nAluno encontrado");
                          System.out.println(alunoBuscado);
                      }
-                 
+                	
                     break;
                 }
                 case 4: {
                 	Noarvore.esvaziar(raiz);
-                    // Implement emptying logic
+                	raiz.arvoreEsvaziada(raiz);
+                	
                     break;
                 }
                 case 5: {
                     System.out.println("Elementos da árvore em ordem:");
                     raiz.imprimiEmOrdem();
+                    
+                    Noarvore.exibirGraficamente(raiz);
+                    
                     break;
                 }
                 case 6: {
