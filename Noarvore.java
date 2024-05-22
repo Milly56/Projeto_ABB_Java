@@ -22,11 +22,16 @@ public class Noarvore {
             imprimiEmOrdem(n.direita);
     	}
     }
-    void exibirGraficamente(Noarvore n) {
-    	if(n != null) {
-    		imprimiEmOrdem(n.esquerda);
-    		System.out.println(n.esquerda);
-    	}
+    public static void exibirGraficamente(Noarvore tree) {
+        exibirGraficamenteRecursivo(tree, "", true);
+    }
+    
+    public static void exibirGraficamenteRecursivo(Noarvore tree, String prefix, boolean isLeft) {
+        if (tree != null) {
+            System.out.println(prefix + (isLeft ? "\n├── " : "└── ") + tree.aluno);
+            exibirGraficamenteRecursivo(tree.esquerda, prefix + (isLeft ? "│   " : "    "), true);
+            exibirGraficamenteRecursivo(tree.direita, prefix + (isLeft ? "│   " : "    "), false);
+        }
     }
  
     public void inserirAluno(String nome, String rgm) {
@@ -52,6 +57,47 @@ public class Noarvore {
     	} catch(NullPointerException ponteiroNulo) {
     		System.out.println("\nErro na tentativa em inserir um objeto vazio");
     	}
+    }
+    
+    public void remover(String rgm) {
+        remover(this, rgm);
+    }
+    
+    private Noarvore remover(Noarvore raiz, String rgm) {
+        if (raiz == null) {
+            return null;
+        }
+
+        // Verifica se o RG do aluno na raiz é igual ao RG buscado
+        if (raiz.aluno.getRgm().equals(rgm)) {
+            // Caso o nó tenha apenas um filho ou nenhum filho
+            if (raiz.esquerda == null) {
+                return raiz.direita;
+            } else if (raiz.direita == null) {
+                return raiz.esquerda;
+            }
+         // Caso o nó tenha dois filhos, encontra o menor nó na subárvore direita
+            Noarvore menorNoDireita = encontrarMenorNoarvore(raiz.direita);
+            raiz.aluno = menorNoDireita.aluno;
+            raiz.direita = remover(raiz.direita, menorNoDireita.aluno.getRgm());
+            return raiz;
+        }
+
+        // Se o RG buscado for menor que o RG do nó atual, remove da subárvore esquerda
+        if (rgm.compareTo(raiz.aluno.getRgm()) < 0) {
+            raiz.esquerda = remover(raiz.esquerda, rgm);
+        } else { // Senão, remove da subárvore direita
+            raiz.direita = remover(raiz.direita, rgm);
+        }
+        return raiz;
+    }
+    
+    private Noarvore encontrarMenorNoarvore(Noarvore no) {
+        Noarvore atual = no;
+        while (atual.esquerda != null) {
+            atual = atual.esquerda;
+        }
+        return atual;
     }
 
     //metodo que recebe qual aluno deseja buscar pelo rgm

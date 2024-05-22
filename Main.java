@@ -25,7 +25,7 @@ public class Main {
         raiz.inserirAluno("Carlos", "987654");
  
         System.out.println("\n");
- 
+        
         boolean verificaLoop = true;
  
         while (verificaLoop) {
@@ -45,73 +45,90 @@ public class Main {
  
             switch (opcoes) {
                 case 1: {
-                
-
-	                	System.out.println("Digite o nome do aluno:");
-	                    String nome = leitorNumero.next();
+                	//responsavel por inserir novos alunos
+                	
+	                System.out.println("Digite o nome do aluno:");
+	                String nome = leitorNumero.next();
 	                    
-	                    boolean verificaRgm;
+	                boolean verificaRgm;
 	                    
-	                    do {                 	
-	                    	System.out.println("Digite o RGM do aluno:");
-	                        String rgm = leitorNumero.next();
-	                        if (rgm.length() == 8) {
-	                        	raiz.inserirAluno(nome, rgm);
-	                        	verificaRgm = false;
-	                        }else if (rgm.length() < 8) {
-	                        	System.out.println("RGM INVÁLIDO, É NECESSARIO MAIS CARACTERES\n");
-	                        	verificaRgm = true;
-	                        }else{
-	                        	System.out.println("RGM INVÁLIDO, É NECESSARIO MENOS CARACTERES\n");
-	                        	verificaRgm = true;
-	                        }
+	                //verifica sem o rgm foi valido pela quantidade de caracteres
+	                do {                 	
+	                  	System.out.println("Digite o RGM do aluno:");
+	                    String rgm = leitorNumero.next();
+	                    if (rgm.length() == 8) {
+	                      	raiz.inserirAluno(nome, rgm);
+	                       	verificaRgm = false;
+	                    }else if (rgm.length() < 8) {
+	                       	System.out.println("RGM INVÁLIDO, É NECESSARIO MAIS CARACTERES\n");
+	                      	verificaRgm = true;
+	                    }else{
+	                       	System.out.println("RGM INVÁLIDO, É NECESSARIO MENOS CARACTERES\n");
+	                       	verificaRgm = true;
+	                    }
 	                        
-	                    }while(verificaRgm);
-                    
-                    
+	                }while(verificaRgm);
                     break;
                 }
                 case 2: {
-                    // Implement removal logic
+                	//responsavel por remover um no
+                	
+                	System.out.print("Digite o RG do aluno que deseja remover: ");
+                    String rgm = leitorNumero.next(); 
+                    
+                    raiz.remover(rgm);
+                    System.out.println("Aluno removido com sucesso!");
                     break;
                 }
                 case 3: {
-
+                	//responsavel por buscar alunos por rgm
+                	
                      System.out.println("\nDigite qual o RGM deseja buscar: ");
                      String buscaRgm = leitorNumero.next();
                      Noarvore alunoBuscado = raiz.buscar(buscaRgm);
 
-                  //verifica se o aluno existe
+                     //verifica se o aluno existe
                      if (alunoBuscado == null) {
                          System.out.println("\nAluno não encontrado");
                      } else {
                      	System.out.println("\nAluno encontrado");
                          System.out.println(alunoBuscado);
                      }
-                 
                     break;
                 }
                 case 4: {
+                	//responsavel por esvaziar a arvore
+                	
                 	Noarvore.esvaziar(raiz);
-                    // Implement emptying logic
                     break;
                 }
                 case 5: {
+                	//responsavel por imprimir a arvore
+                	
                     System.out.println("Elementos da árvore em ordem:");
                     raiz.imprimiEmOrdem();
+                    Noarvore.exibirGraficamente(raiz);
                     break;
                 }
                 case 6: {
+                	//responsavel por sair do loop
                     verificaLoop = false;
                     break;
                 }
                 default: {
+                	//mensagem padrao caso nenhum dos casos sejam validos
+                	
                     System.out.println("Essa não é uma opção válida");
                     System.out.println("Tente novamente");
                     break;
                 }
             }
- 
+            
+            //caso a opcao digitada seja 6 quebra o loop sem passar pela mensagem de retorno
+            if(opcoes == 6)
+            	break;
+            
+            //mensagem de retorna ao loop
             System.out.println("\nDeseja retornar para o menu principal?");
             System.out.println("1 - para sim || 2 - para não");
             int retornar = leitorNumero.nextInt();
@@ -122,7 +139,8 @@ public class Main {
         }
  
         System.out.println("\nAplicação encerrada");
- 
+        
+        //fecha o scanner e depois acaba o programa
         leitorNumero.close();
         System.exit(0);
     }
