@@ -26,10 +26,4 @@ public class Aluno {
         this.rgm = rgm;
         // alterar o valor da variável Rgm de fora da classe Rgm.
     }
- 
-    @Override
-    public String toString() {
-        return "Nome: " + nome + "\nRGM: " + rgm;
-        // isso é para imprimir da forma útil informações legíveis dessa variáveis.
-    }
 }
