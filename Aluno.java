@@ -1,4 +1,6 @@
 public class Aluno {
+	
+	//variaveis de instancia 
     private String nome;
     private String rgm;
     

@@ -20,7 +20,13 @@ public class Noarvore {
             imprimiEmOrdem(n.esquerda);
             System.out.println(n.aluno);
             imprimiEmOrdem(n.direita);
-        }
+    	}
+    }
+    void exibirGraficamente(Noarvore n) {
+    	if(n != null) {
+    		imprimiEmOrdem(n.esquerda);
+    		System.out.println(n.esquerda);
+    	}
     }
  
     public void inserirAluno(String nome, String rgm) {
@@ -29,22 +35,26 @@ public class Noarvore {
     }
  
     private void inserir(Noarvore noarvore, Aluno novoAluno) {
-        if (novoAluno.getRgm().compareTo(noarvore.aluno.getRgm()) < 0) {
-            if (noarvore.esquerda == null) {
-                noarvore.esquerda = new Noarvore(novoAluno);
-            } else {
-                inserir(noarvore.esquerda, novoAluno);
-            }
-        } else if (novoAluno.getRgm().compareTo(noarvore.aluno.getRgm()) > 0) {
-            if (noarvore.direita == null) {
-                noarvore.direita = new Noarvore(novoAluno);
-            } else {
-                inserir(noarvore.direita, novoAluno);
-            }
-        }
+    	try {
+	        if (novoAluno.getRgm().compareTo(noarvore.aluno.getRgm()) < 0) {
+	            if (noarvore.esquerda == null) {
+	                noarvore.esquerda = new Noarvore(novoAluno);
+	            } else {
+	                inserir(noarvore.esquerda, novoAluno);
+	            }
+	        } else if (novoAluno.getRgm().compareTo(noarvore.aluno.getRgm()) > 0) {
+	            if (noarvore.direita == null) {
+	                noarvore.direita = new Noarvore(novoAluno);
+	            } else {
+	                inserir(noarvore.direita, novoAluno);
+	            }
+	        }
+    	} catch(NullPointerException ponteiroNulo) {
+    		System.out.println("\nErro na tentativa em inserir um objeto vazio");
+    	}
     }
 
- //metodo que recebe qual aluno deseja buscar pelo rgm
+    //metodo que recebe qual aluno deseja buscar pelo rgm
     public Noarvore buscar(String rgm) {
         return buscar(this, rgm);
     }
