@@ -6,15 +6,30 @@ import java.io.IOException;
 public class Principal {
     public static void main(String[] args) {
         
+    	// criar uma variável e atrbui o nome do arquivo que sera lido;
     	
     	 String fileName = "dado.txt";
          
+    	 // bloco de exeções podem ocorrer
+  
          try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
              String line;
+             
+             // lendo cada linha do arquivo até encontrar uma linha nula;
+             
              while ((line = br.readLine()) != null) {
+            	 
+            	 // imprimi a linha atual no console
+            	 
                  System.out.println(line);
              }
+             
+             // captura qualquer exceção que possa ocorrer durante a leitura no arquivo;
+             
          } catch (IOException e) {
+        	 
+        	 // se ocorrer uma exceção,imprime uma mensagem de erro no console;
+        	 
              System.err.println("Erro ao ler o arquivo: " + e.getMessage());
          }
   
@@ -45,10 +60,14 @@ public class Principal {
             switch (opcoes) {
                 case 1: {
                 	
+                	//responsavel por inserir novos alunos
+                	
                 	System.out.println("Digite o nome do aluno:");
                     String nome = leitorNumero.next();
                     
                     boolean verificaRgm;
+                    
+                  //verifica sem o rgm foi valido pela quantidade de caracteres
                     
                     do {                 	
                     	System.out.println("Digite o RGM do aluno:");
@@ -70,7 +89,9 @@ public class Principal {
                     break;
                 }
                 case 2: {
-                 
+                	
+                	//responsavel por remover um no
+                	
                 	System.out.print("Digite o RG do aluno que deseja remover: ");
                     String rgm = leitorNumero.next(); 
                     raiz.remover(rgm);
@@ -82,6 +103,8 @@ public class Principal {
                 }
                 case 3: {
                   
+                	//responsavel por buscar alunos por rgm
+                	
                 	 System.out.println("\nDigite qual o RGM deseja buscar: ");
                      String buscaRgm = leitorNumero.next();
                      Noarvore alunoBuscado = raiz.buscar(buscaRgm);
@@ -98,30 +121,56 @@ public class Principal {
                     break;
                 }
                 case 4: {
-                	Noarvore.esvaziar(raiz);
-                	raiz.arvoreEsvaziada(raiz);
+                	//responsavel por esvaziar a arvore
                 	
+                	Noarvore.esvaziar(raiz);
+             
                     break;
                 }
+              
                 case 5: {
+                    // Exibir a árvore em ordem
                     System.out.println("Elementos da árvore em ordem:");
                     raiz.imprimiEmOrdem();
                     
+                    // Exibir a árvore em pré-ordem
+                    System.out.println("\nElementos da árvore em pré-ordem:");
+                    raiz.imprimiPreOrdem();
+                    
+                    // Exibir a árvore em pós-ordem
+                    System.out.println("\nElementos da árvore em pós-ordem:");
+                    raiz.imprimiPosOrdem();
+                    
+                    // Exibir graficamente a árvore
+                    System.out.println("\nExibição gráfica da árvore:");
                     Noarvore.exibirGraficamente(raiz);
                     
                     break;
                 }
+                
                 case 6: {
+                	//responsavel por sair do loop
+
                     verificaLoop = false;
                     break;
                 }
                 default: {
+                	
+                	//mensagem padrao caso nenhum dos casos sejam validos
+                	
                     System.out.println("Essa não é uma opção válida");
                     System.out.println("Tente novamente");
                     break;
                 }
             }
  
+            //caso a opcao digitada seja 6 quebra o loop sem passar pela mensagem de retorno
+            
+            if(opcoes == 6)
+            	break;
+            
+            //mensagem de retorna ao loop
+            
             System.out.println("\nDeseja retornar para o menu principal?");
             System.out.println("1 - para sim || 2 - para não");
             int retornar = leitorNumero.nextInt();
@@ -131,8 +180,9 @@ public class Principal {
             System.out.println();
         }
  
-        System.out.println("\nVocê saiu do loop");
- 
+        System.out.println("\nAplicação encerrada");
+        
+        //fecha o scanner e depois acaba o programa
         leitorNumero.close();
         System.exit(0);
     }
